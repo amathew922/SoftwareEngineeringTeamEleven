@@ -2,20 +2,79 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Password Generator</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        #generatedPassword {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <div class="box">
-        <h2>Password Generater</h2>
-        <input type="text" name="" placeholder="Create password" id="password" readonly>
-        <table>
-            <th><div id="button" class="btn1"onclick="genPassword()">Generate</div></th>
-            <th><a  id="button" class="btn2" onclick="copyPassword()">Copy</a></th>
-         </table>
+    <h1>Password Generator</h1>
+    <div class="form-group">
+        <label for="length">Length:</label>
+        <input type="number" id="length" value="12" min="8" max="64">
     </div>
-    <script src="script.js"></script>
+    <div class="form-group">
+        <label>
+            <input type="checkbox" id="includeUppercase" checked>
+            Include Uppercase
+        </label>
+    </div>
+    <div class="form-group">
+        <label>
+            <input type="checkbox" id="includeNumbers" checked>
+            Include Numbers
+        </label>
+    </div>
+    <div class="form-group">
+        <label>
+            <input type="checkbox" id="includeSymbols" checked>
+            Include Symbols
+        </label>
+    </div>
+    <button onclick="generatePassword()">Generate Password</button>
+    <div id="generatedPassword"></div>
+
+    <script>
+        async function generatePassword() {
+            const length = document.getElementById('length').value;
+            const includeUppercase = document.getElementById('includeUppercase').checked;
+            const includeNumbers = document.getElementById('includeNumbers').checked;
+            const includeSymbols = document.getElementById('includeSymbols').checked;
+
+            try {
+                const response = await fetch('http://localhost:3001/generate-password', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        length,
+                        includeUppercase,
+                        includeNumbers,
+                        includeSymbols,
+                    }),
+                });
+                const data = await response.json();
+                document.getElementById('generatedPassword').textContent = `Generated Password: ${data.password}`;
+            } catch (error) {
+                console.error('Error generating password:', error);
+                document.getElementById('generatedPassword').textContent = 'Error generating password. Please try again.';
+            }
+        }
+    </script>
 </body>
 </html>
