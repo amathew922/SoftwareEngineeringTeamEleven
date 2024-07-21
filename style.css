@@ -1,0 +1,84 @@
+* {
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #14e5;
+}
+
+.box {
+    background-color: rgb(243, 243, 243);
+    padding: 40px ;
+    border-radius: 28px;
+    box-shadow: 8px 5px 14px -1px rgb(94, 94, 94);
+    -webkit-box-shadow: 8px 5px 14px -1px rgba(94, 94, 94);
+    -moz-box-shadow: 8px 5px 14px -1px rgba(94, 94, 94);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.box h2 {
+    margin-bottom: 40px;
+    text-align: center;
+    font-size: 26px;
+    color: black;
+    font-family: sans-serif;
+}
+
+input {
+    padding: 20px;
+    user-select: none;
+    height: 50px;
+    width: 100%; /* Make input width 100% for responsiveness */
+    border-radius: 6px;
+    border: 2px solid black;
+    outline: none;
+    font-size: 22px;
+    margin-bottom: 20px; /* Add margin-bottom for spacing */
+}
+
+input::placeholder {
+    font-size: 23px;
+}
+
+#button {
+    font-family: sans-serif;
+    font-size: 15px;
+    margin-top: 20px; /* Reduce margin-top for responsiveness */
+    width: 100%; /* Make button width 100% for responsiveness */
+    height: 50px;
+    text-align: center;
+    background-color: #14e5;
+    display: flex;
+    color: rgb(255, 255, 255);
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 7px;
+    transition: 400ms ease;
+}
+
+.btn2 {
+    margin-top: 10px; /* Add margin-top for spacing */
+}
+
+/* Media queries for responsiveness */
+@media only screen and (min-width: 600px) {
+    /* Styles for tablets and larger screens */
+    input, #button {
+        max-width: 400px;
+        margin: auto; /* Center input and button on larger screens */
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    /* Styles for tablets and larger screens */
+    .box {
+        width: 50%;
+    }
+}
